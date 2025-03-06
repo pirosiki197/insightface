@@ -3,12 +3,15 @@ name = "arcface-torch"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = "<3.12,>=3.7.0"
+requires-python = "<3.11.0,>=3.9.0"
 dependencies = [
     "easydict>=1.13",
     "mxnet>=1.9.1",
+    "numpy<1.23.0",
     "onnx>=1.14.1",
     "opencv-python>=4.11.0.86",
     "scikit-learn>=1.0.2",
-    "torch==1.13.1",
+    "tensorboard>=2.11.2",
+    "torch==2.6.0",
+    "torchvision>=0.14.1",
 ]
