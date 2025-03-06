@@ -88,7 +88,6 @@ class DistributedSampler(_DistributedSampler):
         shuffle=True,
         seed=0,
     ):
-
         super().__init__(dataset, num_replicas=num_replicas, rank=rank, shuffle=shuffle)
 
         # In distributed sampling, different ranks should sample

@@ -1,4 +1,3 @@
-
 import math
 from typing import Callable
 
@@ -26,6 +25,7 @@ class PartialFC_V2(torch.nn.Module):
     >>>     loss.backward()
     >>>     optimizer.step()
     """
+
     _version = 2
 
     def __init__(
@@ -47,9 +47,9 @@ class PartialFC_V2(torch.nn.Module):
             The rate of negative centers participating in the calculation, default is 1.0.
         """
         super(PartialFC_V2, self).__init__()
-        assert (
-            distributed.is_initialized()
-        ), "must initialize distributed before create this"
+        assert distributed.is_initialized(), (
+            "must initialize distributed before create this"
+        )
         self.rank = distributed.get_rank()
         self.world_size = distributed.get_world_size()
 
@@ -68,7 +68,9 @@ class PartialFC_V2(torch.nn.Module):
 
         self.is_updated: bool = True
         self.init_weight_update: bool = True
-        self.weight = torch.nn.Parameter(torch.normal(0, 0.01, (self.num_local, embedding_size)))
+        self.weight = torch.nn.Parameter(
+            torch.normal(0, 0.01, (self.num_local, embedding_size))
+        )
 
         # margin_loss
         if isinstance(margin_loss, Callable):
@@ -78,15 +80,15 @@ class PartialFC_V2(torch.nn.Module):
 
     def sample(self, labels, index_positive):
         """
-            This functions will change the value of labels
-            Parameters:
-            -----------
-            labels: torch.Tensor
-                pass
-            index_positive: torch.Tensor
-                pass
-            optimizer: torch.optim.Optimizer
-                pass
+        This functions will change the value of labels
+        Parameters:
+        -----------
+        labels: torch.Tensor
+            pass
+        index_positive: torch.Tensor
+            pass
+        optimizer: torch.optim.Optimizer
+            pass
         """
         with torch.no_grad():
             positive = torch.unique(labels[index_positive], sorted=True).cuda()
@@ -127,7 +129,8 @@ class PartialFC_V2(torch.nn.Module):
         if self.last_batch_size == 0:
             self.last_batch_size = batch_size
         assert self.last_batch_size == batch_size, (
-            f"last batch size do not equal current batch size: {self.last_batch_size} vs {batch_size}")
+            f"last batch size do not equal current batch size: {self.last_batch_size} vs {batch_size}"
+        )
 
         _gather_embeddings = [
             torch.zeros((batch_size, self.embedding_size)).cuda()

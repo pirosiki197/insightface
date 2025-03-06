@@ -24,4 +24,4 @@ config.num_classes = 2059906
 config.num_image = 42474557
 config.num_epoch = 20
 config.warmup_epoch = config.num_epoch // 10
-config.val_targets = ['lfw', 'cfp_fp', "agedb_30"]
+config.val_targets = ["lfw", "cfp_fp", "agedb_30"]
