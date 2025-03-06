@@ -3,7 +3,6 @@ import logging
 import os
 from datetime import datetime
 
-import numpy as np
 import torch
 from backbones import get_model
 from dataset import get_dataloader
